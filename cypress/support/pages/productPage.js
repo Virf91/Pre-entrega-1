@@ -3,6 +3,6 @@
 export class ProductPage{
 
     añadirProducto(producto){
-        cy.get('').click();
+        cy.xpath('//button[@class="chakra-button css-1p0xaah"]').click(producto);
     }
 }

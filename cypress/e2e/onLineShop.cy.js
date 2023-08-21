@@ -30,11 +30,13 @@
 
 /// <reference types="cypress" />
 import { LoginPage } from "../support/pages/loginPage";
+import { ProductPage } from "../support/pages/productPage";
 
 describe('Test Online Shop utilizando POM' , () => {
     let datoslog;
     let datosprod;
     const loginPage = new LoginPage();
+    const productPage = new ProductPage();
     
     before('', () => {
         cy.fixture('datosLogin').then( datalogin => {
@@ -49,12 +51,14 @@ describe('Test Online Shop utilizando POM' , () => {
     it ('', () => {
         cy.visit('');
         cy.get('#registertoggle').dblclick();
-        loginPage.escribirUsuario(datoslog.user)
-        loginPage.escribirContraseña(datoslog.password)
+        loginPage.escribirUsuario(datoslog.user);
+        loginPage.escribirContraseña(datoslog.password);
         loginPage.clickButtonSubmit();
-        cy.xpath('//button[@type="submit"]').click();
-
-// - Dirigirse al modulo "Online Shop".
+        cy.get('#onlineshoplink').click(); // - Dirigirse al modulo "Online Shop".
+        productPage.añadirProducto('#pinksweater');
+        cy.get('#closeModal').wait(2000).click();
+        productPage.añadirProducto('#Black Socks');
+        cy.get('#closeModal').wait(2000).click();
 // - Elegir 2 productos a elección y añadirlos al carrito.
 // - Verificar el nombre y precio de los dos productos.
 // - Hacer click en "Show total price" y verificar el precio acumulado de los 2 productos

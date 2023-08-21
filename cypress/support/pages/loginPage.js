@@ -9,7 +9,7 @@ constructor(){
         cy.get(this.userInput).type(usuario)
     };
 
-    esscribirContraseña(password){
+    escribirContraseña(password){
         cy.get(this.passInput).type(password)
     };
 
